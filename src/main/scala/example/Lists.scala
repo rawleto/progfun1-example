@@ -28,11 +28,11 @@ object Lists:
    */
   def sum(xs: List[Int]): Int = {
     @tailrec
-    def sumf(acc: Int, newVal: Int, dropped: List[Int]): Int =
-      if dropped.isEmpty then acc + newVal
-      else sumf(acc + newVal, dropped.head, dropped.drop(1))
+    def sumf(acc: Int, dropped: List[Int]): Int =
+      if dropped.isEmpty then acc
+      else sumf(acc + dropped.head, dropped.tail)
 
-    sumf(0, 0, xs)
+    sumf(xs.head, xs.tail)
   }
 
   /**
