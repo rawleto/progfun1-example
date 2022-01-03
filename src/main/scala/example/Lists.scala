@@ -1,5 +1,9 @@
 package example
 
+import java.util.NoSuchElementException
+import scala.List.*
+import scala.annotation.tailrec
+
 object Lists:
 
   /**
@@ -16,13 +20,20 @@ object Lists:
    *  - `xs.tail: List[Int]` returns the tail of the list `xs`, i.e. the the
    *    list `xs` without its `head` element
    *
-   *  ''Hint:'' instead of writing a `for` or `while` loop, think of a recursive
-   *  solution.
+   * ''Hint:'' instead of writing a `for` or `while` loop, think of a recursive
+   * solution.
    *
    * @param xs A list of natural numbers
    * @return The sum of all elements in `xs`
    */
-  def sum(xs: List[Int]): Int = ???
+  def sum(xs: List[Int]): Int = {
+    @tailrec
+    def sumf(acc: Int, newVal: Int, dropped: List[Int]): Int =
+      if dropped.isEmpty then acc + newVal
+      else sumf(acc + newVal, dropped.head, dropped.drop(1))
+
+    sumf(0, 0, xs)
+  }
 
   /**
    * This method returns the largest element in a list of integers. If the
@@ -37,4 +48,17 @@ object Lists:
    * @return The largest element in `xs`
    * @throws java.util.NoSuchElementException if `xs` is an empty list
    */
-  def max(xs: List[Int]): Int = ???
+  def max(xs: List[Int]): Int = {
+    if (xs.isEmpty) throw new NoSuchElementException
+
+    @tailrec
+    def maxAcc(max: Int, reduce: List[Int]): Int = {
+      if reduce.isEmpty then max
+      else
+        val head = reduce.head
+        if (max > head) max
+        else maxAcc(head, reduce.drop(1))
+    }
+
+    maxAcc(Int.MinValue, xs)
+  }
