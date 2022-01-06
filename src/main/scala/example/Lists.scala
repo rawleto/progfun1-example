@@ -27,6 +27,7 @@ object Lists:
    * @return The sum of all elements in `xs`
    */
   def sum(xs: List[Int]): Int = {
+
     @tailrec
     def sumf(acc: Int, dropped: List[Int]): Int =
       if dropped.isEmpty then acc
