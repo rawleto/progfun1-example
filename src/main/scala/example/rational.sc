@@ -1,5 +1,11 @@
 import scala.annotation.tailrec
 
+val a=2
+val b=3
+val x=a+b
+println("Нина говорит, что x=" +
+  x)
+
 class Rational(x: Int, y: Int):
   require(y > 0, s"Denominator must be positive, was $x/$y")
 
@@ -34,11 +40,11 @@ class Rational(x: Int, y: Int):
   override def toString = s"$numer/$denom"
 end Rational
 
-val x = new Rational(1, 3)
+val l = new Rational(1, 3)
 val y = new Rational(5, 7)
 val z = new Rational(3, 2)
 val h = new Rational(2, 6)
 val k = new Rational(2)
 
-println(x.add(y).mul(z))
-println(x.sub(y).add(z.neg()))
+println(l.add(y).mul(z))
+println(l.sub(y).add(z.neg()))
